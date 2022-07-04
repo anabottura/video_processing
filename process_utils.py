@@ -27,11 +27,13 @@ def test_cut(filedir, filename, x_dim=[0, 1920], y_dim=[270, 970], show='cut'):
 
     vid = cv2.VideoCapture(filedir + filename)
 
-    print(vid.shape())
+
+    #print(vid.shape)
 
     while True:
         ret, frame = vid.read()
         # res_frame = cv2.resize(frame, (960, 540))
+        # print(frame.shape)
         if show == 'cut':
             cut = frame[y_dim[0]:y_dim[1], x_dim[0]:x_dim[1]]
             cv2.imshow('cut', cut)
@@ -83,8 +85,7 @@ def split_box_videos(filedir, filename, boxes, f_rate=20.0, trim='False'):
         if ret:
             for box in boxes.keys():
                 cut = frame[boxes[box][0]:boxes[box][1], boxes[box][2]:boxes[box][3]]
-                cut = cv2.cvtColor(cut, cv2.COLOR_RGB2GRAY)
-                # cv2.imshow('video', cut)
+                # cut = cv2.cvtColor(cut, cv2.COLOR_RGB2GRAY)
                 v_writers[box].write(cut)
             frame_counter += 1
         else:
