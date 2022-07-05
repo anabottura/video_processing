@@ -1,19 +1,11 @@
-import os.path
 from os import path
 import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-from IPython.display import clear_output
-from tqdm import tqdm 
-from scipy.signal import butter, lfilter, freqz, filtfilt
-
-# directory where videos are stored
 
 # Data files should be .avi's and have the following form:
 # '<dataDir><dataFilePrefix><startingFileNum>.avi'
 
 # Values users can modify:
-dataDir = "./"
+dataDir = "./" # directory where videos are stored
 dataFilePrefix = ''
 startingFileNum = 0
 framesPerFile = 1000 # This is the default setting for the Miniscope software. If you changed it in software change it here too.
@@ -44,7 +36,7 @@ cols = int(cap_list[0].get(cv2.CAP_PROP_FRAME_WIDTH))
 rows = int(cap_list[0].get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 
-writeFile = cv2.VideoWriter((dataDir + dataFilePrefix + "concat.avi"), fourcc=codec, fps=60, frameSize=(cols,rows))
+writeFile = cv2.VideoWriter((dataDir + dataFilePrefix + "concat.avi"), fourcc=codec, fps=30, frameSize=(cols,rows))
 
 
 for cap in cap_list:
